@@ -1,93 +1,131 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tabla Ejemplo</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Tabla - Ejemplo práctico</title>
 <style>
-  body {
-    font-family: Arial, sans-serif;
-    background: #f4f4f4;
-    padding: 20px;
+  *{box-sizing:border-box}
+  body{
+    font-family: "Segoe UI", Arial, sans-serif;
+    background:#f2f2f1;
+    padding:24px;
+    display:flex;
+    justify-content:center;
   }
-  table {
-    border-collapse: collapse;
-    background: white;
+
+  table{
+    border-collapse:collapse;
+    background:#fff;
+    width:800px;           /* ajustar según quieras */
+    box-shadow:0 2px 0 rgba(0,0,0,0.06);
   }
-  th, td {
-    border: 1px solid #333;
-    padding: 8px 12px;
-    text-align: left;
-    vertical-align: middle;
+
+  th, td{
+    border:2px solid #3b3b3b;
+    padding:16px;
+    text-align:center;
+    vertical-align:middle;
   }
-  th {
-    background-color: #333;
-    color: white;
+
+  th{
+    background:#2b3640;    /* encabezados oscuros */
+    color:#fff;
+    font-weight:700;
+    font-size:18px;
+    padding:22px;
   }
+
+  /* Celda de ciudades: si contiene varias "subceldas" las ponemos lado a lado */
+  .cities{
+    padding:0;             /* manejamos el padding en los boxes internos */
+    width:360px;           /* ancho de la columna ciudades (ajustable) */
+  }
+  .cities-inner{
+    display:flex;
+    width:100%;
+    height:100%;
+  }
+  .city{
+    flex:1;
+    padding:14px 10px;
+    border-left:1px solid #3b3b3b;
+    border-right:1px solid #3b3b3b;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:56px;       /* altura mínima para que quede como cuadro */
+  }
+  /* evitar doble borde con el borde exterior: quitamos el izquierdo del primer y derecho del último */
+  .city:first-child{ border-left:0; }
+  .city:last-child{ border-right:0; }
+
+  /* Para ciudades que son solo una (Ana) usamos este estilo */
+  .city-single{
+    padding:14px 12px;
+    min-height:56px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  /* Opcional: que el texto se vea un poco como en la foto (mayor contraste) */
+  td{ color:#222; font-size:15px; }
 </style>
 </head>
 <body>
 
-<h2>Tabla de Ejemplo</h2>
+<table aria-label="Tabla de personas">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Edad</th>
+      <th>Ciudades</th>
+      <th>Profesión</th>
+    </tr>
+  </thead>
 
-<table>
-  <tr>
-    <th>Nombre</th>
-    <th>Edad</th>
-    <th>Ciudades</th>
-    <th>Profesión</th>
-  </tr>
-  <tr>
-    <td>Ana</td>
-    <td>28</td>
-    <td>Buenos Aires</td>
-    <td rowspan="3">Ingeniero</td>
-  </tr>
-  <tr>
-    <td>Lucas</td>
-    <td rowspan="2">35</td>
-    <td>Córdoba</td>
-  </tr>
-  <tr>
-    <td>Martina</td>
-    <td>Rosario</td>
-  </tr>
-  <tr>
-    <td></td>
-    <td></td>
-    <td>Mendoza</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td></td>
-    <td></td>
-    <td>Mendoza</td>
-    <td></td>
-  </tr>
-</table>
+  <tbody>
+    <!-- FILA 1: Ana -->
+    <tr>
+      <td>Ana</td>
+      <td>28</td>
+      <td class="cities">
+        <!-- una sola ciudad: usamos city-single -->
+        <div class="city-single">Buenos Aires</div>
+      </td>
+      <!-- profesión ocupa las 3 filas -->
+      <td rowspan="3">Ingeniero</td>
+    </tr>
 
-</body>
-</html>    <th>Ciudades</th>
-    <th>Profesión</th>
-  </tr>
-  <tr>
-    <td>Ana</td>
-    <td>28</td>
-    <td>Buenos Aires<br>Córdoba</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>Lucas</td>
-    <td></td>
-    <td>Mendoza<br>Rosario</td>
-    <td>Ingeniero</td>
-  </tr>
-  <tr>
-    <td>Martina</td>
-    <td>35</td>
-    <td>Córdoba</td>
-    <td></td>
-  </tr>
+    <!-- FILA 2: Lucas (edad compartida con Martina) -->
+    <tr>
+      <td>Lucas</td>
+      <!-- edad compartida entre Lucas y Martina -->
+      <td rowspan="2">35</td>
+
+      <!-- ciudades: dos cuadros lado a lado -->
+      <td class="cities">
+        <div class="cities-inner">
+          <div class="city">Córdoba</div>
+          <div class="city">Mendoza</div>
+        </div>
+      </td>
+      <!-- no ponemos td para profesión aquí porque está en la primera fila con rowspan -->
+    </tr>
+
+    <!-- FILA 3: Martina -->
+    <tr>
+      <td>Martina</td>
+      <!-- la celda de edad ya está ocupada por el rowspan de arriba -->
+      <td class="cities">
+        <div class="cities-inner">
+          <div class="city">Rosario</div>
+          <div class="city">Mendoza</div>
+        </div>
+      </td>
+    </tr>
+  </tbody>
 </table>
 
 </body>
