@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página de Luca Costabile</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+
+  <!-- Título -->
+  <header>
+    <h1 id="titulo-principal">Luca Costabile</h1>
+  </header>
+
+  <!-- Imagen -->
+  <section>
+    <img src="mifoto.jpg" alt="Foto de Luca Costabile" class="foto-perfil">
+  </section>
+
+  <!-- Tabla -->
+  <section>
+    <h2>Datos Personales</h2>
+    <table class="tabla-datos">
+      <tr>
+        <th>Edad</th>
+        <td>20 años</td>
+      </tr>
+      <tr>
+        <th>Estudios</th>
+        <td>Tecnicatura en Desarrollo de Software (3er año)</td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- Div con estilo específico -->
+  <div class="caja-info">
+    <p>Me apasiona el desarrollo de software, con experiencia en web, backend y cloud computing.</p>
+  </div>
+
+  <!-- Lista de habilidades -->
+  <section>
+    <h2>Áreas y tecnologías que manejo</h2>
+    <ul class="lista-habilidades">
+      <li>Desarrollo web</li>
+      <li>Java</li>
+      <li>Node.js</li>
+      <li>Next.js</li>
+      <li>Spring Boot</li>
+      <li>Machine Learning (cursos)</li>
+      <li>AWS: Cloud Foundations, Cloud Operations, Cloud Security</li>
+    </ul>
+  </section>
+
+  <!-- Enlace a segunda página -->
+  <section>
+    <p>Visita mi perfil de <a href="https://www.linkedin.com/in/luca-costabile-aa6aa7266" target="_blank">LinkedIn</a></p>
+  </section>
+
+  <!-- Formulario -->
+  <section>
+    <h2>Solicitud de trabajo freelancer</h2>
+    <form id="form-trabajo">
+      <label for="nombre">Nombre / Empresa:</label>
+      <input type="text" id="nombre" name="nombre" required>
+
+      <label for="correo">Correo electrónico:</label>
+      <input type="email" id="correo" name="correo" required>
+
+      <label for="telefono">Teléfono:</label>
+      <input type="tel" id="telefono" name="telefono">
+
+      <label for="tipo">Tipo de desarrollo requerido:</label>
+      <select id="tipo" name="tipo" required>
+        <option value="">--Seleccionar--</option>
+        <option value="web">Desarrollo de página web</option>
+        <option value="app-web">Aplicación web</option>
+        <option value="gestion">Sistema de gestión</option>
+        <option value="productos">Manejo de productos</option>
+      </select>
+
+      <label>Urgencia del trabajo:</label>
+      <input type="radio" name="urgencia" value="alta" required> Alta
+      <input type="radio" name="urgencia" value="media"> Media
+      <input type="radio" name="urgencia" value="baja"> Baja
+
+      <label for="descripcion">Descripción del trabajo:</label>
+      <textarea id="descripcion" name="descripcion" rows="4" required></textarea>
+
+      <button type="submit">Enviar solicitud</button>
+    </form>
+  </section>
+
+</body>
+</html>

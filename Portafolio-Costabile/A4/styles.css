@@ -1,0 +1,90 @@
+/* ====== ESTILOS GENERALES ====== */
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  background-color: #f9f9f9;
+}
+
+/* 1️⃣ ID con 4 atributos */
+#titulo-principal {
+  color: #2c3e50;
+  text-align: center;
+  font-size: 2.2em;
+  margin-bottom: 20px;
+}
+
+/* 2️⃣ Clase para imagen con 4 atributos */
+.foto-perfil {
+  display: block;
+  margin: 0 auto;
+  width: 200px;
+  border-radius: 50%;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+/* 3️⃣ Clase para tabla con 4 atributos */
+.tabla-datos {
+  border-collapse: collapse;
+  margin: 0 auto;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+.tabla-datos th, .tabla-datos td {
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+}
+
+/* 4️⃣ Clase para div con 4 atributos */
+.caja-info {
+  background-color: #ecf0f1;
+  border: 2px solid #bdc3c7;
+  padding: 15px;
+  margin: 20px auto;
+  width: 60%;
+  border-radius: 8px;
+}
+
+/* 5️⃣ Clase para lista con 4 atributos */
+.lista-habilidades {
+  margin: 10px auto;
+  width: 60%;
+  list-style-type: square;
+  background: #fff;
+  padding: 15px;
+  border: 1px solid #ccc;
+}
+.lista-habilidades li {
+  margin: 5px 0;
+}
+
+/* Estilo para formulario */
+form {
+  background-color: white;
+  padding: 20px;
+  border: 1px solid #ccc;
+  width: 60%;
+  margin: 20px auto;
+  border-radius: 8px;
+}
+form label {
+  display: block;
+  margin-top: 10px;
+}
+form input, form select, form textarea {
+  width: 100%;
+  padding: 6px;
+  margin-top: 4px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+form button {
+  margin-top: 15px;
+  background: #2c3e50;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+form button:hover {
+  background: #34495e;
+}
