@@ -1,232 +1,63 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Mi Sitio Web - Práctica</title>
-<style>
-  :root{
-    --bg:#f6f6f4;
-    --panel:#fff;
-    --muted:#6b6b6b;
-    --accent:#e9e7df;
-    --line:#e0ded8;
-    --nav-w:64px;
-    --hdr-w:56px;
-  }
-
-  html,body{
-    height:100%;
-    margin:0;
-    font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    background: linear-gradient(180deg, #f2f2f1 0%, var(--bg) 100%);
-    color:#222;
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
-  }
-
-  /* Grid layout: nav | main | aside | header (vertical) */
-  .page {
-    min-height:100vh;
-    display:grid;
-    grid-template-columns: var(--nav-w) 1fr 280px var(--hdr-w);
-    grid-template-rows: auto 1fr auto;
-    gap:0;
-    align-items:start;
-  }
-
-  /* NAV (izquierda, vertical con iconos) */
-  nav {
-    grid-column:1 / 2;
-    grid-row:1 / 4;
-    background:transparent;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    padding:18px 8px;
-    gap:14px;
-  }
-  /* iconos circulares */
-  nav .icon {
-    width:44px;
-    height:44px;
-    border-radius:50%;
-    background:var(--panel);
-    border:2px solid var(--line);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    box-shadow: 0 1px 0 rgba(0,0,0,0.03);
-    cursor:pointer;
-  }
-  nav .icon svg{ width:20px; height:20px; opacity:0.7; }
-
-  /* HEADER vertical (derecha) */
-  header {
-    grid-column:4 / 5;
-    grid-row:1 / 4;
-    writing-mode: vertical-rl;
-    text-orientation: mixed;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:transparent;
-    padding:10px 6px;
-    font-weight:700;
-    font-size:16px;
-    color:#222;
-    letter-spacing:1px;
-    border-left:1px solid var(--line);
-  }
-
-  /* MAIN area (centro), la fila superior la usamos para el contenido */
-  main {
-    grid-column:2 / 3;
-    grid-row:1 / 2;
-    padding:22px 26px;
-  }
-
-  /* Section principal con título vertical centrado */
-  section.principal {
-    background:transparent;
-    border:1px solid var(--line);
-    border-radius:6px;
-    padding:12px 18px;
-    min-height:520px;
-    box-shadow: 0 2px 0 rgba(0,0,0,0.02);
-  }
-  section.principal h2{
-    margin:0 0 8px 0;
-    font-size:18px;
-    color:#1f1f1f;
-  }
-  /* Artículos (cada uno con su cabecera y cuerpo) */
-  article {
-    background:var(--panel);
-    border-top:1px solid var(--line);
-    padding:16px 12px;
-  }
-  article:first-of-type{ border-top:0; }
-  article h3{
-    margin:0 0 6px 0;
-    font-size:15px;
-  }
-  article p{ margin:0; color:var(--muted); line-height:1.45; }
-
-  /* Aside (columna derecha, contenedor para info adicional) */
-  aside {
-    grid-column:3 / 4;
-    grid-row:1 / 2;
-    padding:22px;
-    border-left:1px solid var(--line);
-  }
-  .aside-card {
-    background:var(--panel);
-    padding:14px;
-    border-radius:6px;
-    border:1px solid var(--line);
-    min-height:160px;
-  }
-  .aside-card h4{ margin:0 0 8px 0; font-size:14px; }
-  .aside-card p{ margin:0; color:var(--muted); font-size:13px; }
-
-  /* FOOTER */
-  footer {
-    grid-column:1 / 4;
-    grid-row:3 / 4;
-    padding:12px 18px;
-    border-top:1px solid var(--line);
-    color:var(--muted);
-    font-size:13px;
-    display:flex;
-    gap:12px;
-    align-items:center;
-    background:transparent;
-  }
-  footer .copyright{ margin-left:8px; }
-
-  /* pequenas adaptaciones para pantallas pequeñas */
-  @media (max-width:900px){
-    .page{
-      grid-template-columns: var(--nav-w) 1fr var(--hdr-w);
-      grid-template-rows: auto 1fr auto;
-    }
-    aside{ display:none; }
-    header{ grid-column:3 / 4; grid-row:1 / 3; }
-    footer{ grid-column:1 / 4; }
-  }
-</style>
+    <meta charset="UTF-8">
+    <title>Menú de Portafolios</title>
+    <style>
+        body {
+            background: #f5f6fa;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .menu-contenedor {
+            background: #fff;
+            padding: 40px 32px;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 32px;
+            color: #2b3640;
+            font-size: 2.2em;
+            letter-spacing: 1px;
+        }
+        .menu-lista {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .menu-lista li {
+            margin-bottom: 18px;
+        }
+        .menu-lista a {
+            display: inline-block;
+            padding: 12px 36px;
+            background: #2b3640;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 500;
+            transition: background 0.2s, transform 0.2s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .menu-lista a:hover {
+            background: #0077cc;
+            transform: translateY(-2px) scale(1.04);
+        }
+    </style>
 </head>
 <body>
-  <div class="page">
-    <!-- NAV vertical izquierdo -->
-    <nav aria-label="Navegación principal">
-      <button class="icon" title="inicio" aria-label="inicio">
-        <!-- icono simple -->
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 10.5L12 4l9 6.5"/><path d="M4 21h16V11"/></svg>
-      </button>
-
-      <button class="icon" title="buscar" aria-label="buscar">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="6"/><path d="M21 21l-4.3-4.3"/></svg>
-      </button>
-
-      <button class="icon" title="favoritos" aria-label="favoritos">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 17l-5.5 3 1.5-6.5L3 9l6.8-.5L12 2l2.2 6.5L21 9l-5 4.5L17.5 20z"/></svg>
-      </button>
-
-      <button class="icon" title="más" aria-label="más">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg>
-      </button>
-    </nav>
-
-    <!-- HEADER vertical (texto en vertical al borde derecho) -->
-    <header role="banner">
-      Mi Sitio Web
-    </header>
-
-    <!-- MAIN: sección principal con artículos -->
-    <main>
-      <section class="principal" aria-labelledby="principal-title">
-        <h2 id="principal-title">Sección principal <small style="color:var(--muted);font-weight:400;">(usar la etiqueta &lt;section&gt;)</small></h2>
-
-        <article aria-labelledby="art1">
-          <h3 id="art1">Artículo 1</h3>
-          <p>Este es el contenido del primer artículo. Aquí puedes escribir texto, imágenes o lo que tu práctica solicite. Está dentro de un &lt;article&gt;.</p>
-        </article>
-
-        <article aria-labelledby="art2">
-          <h3 id="art2">Artículo 2</h3>
-          <p>Otro artículo con información adicional. Puedes duplicar artículos para añadir más entradas como en el ejemplo.</p>
-        </article>
-
-        <!-- más espacio vacío para simular líneas en la imagen -->
-        <div style="height:220px; border-top:1px dashed var(--line); margin-top:8px;"></div>
-      </section>
-      <div>
-        <a href="A2.html"> Enlace a pagina A2</a>
-      </div>
-      <div>
-        <a href="A3.html"> Enlace a pagina A3</a>
-      </div>
-      <div>
-        <a href="Portafolio-Costabile/A4/A4.html"> Enlace a pagina A4-Costabile</a>
-      </div>
-      
-    </main>
-
-    <!-- ASIDE: información adicional -->
-    <aside aria-labelledby="aside-title">
-      <div class="aside-card">
-        <h4 id="aside-title">Información adicional</h4>
-        <p>Notas, enlaces, publicidad o cualquier contenido secundario que complemente la sección principal.</p>
-      </div>
-    </aside>
-
-    <!-- FOOTER -->
-    <footer>
-      <div>© 2025 — Grupo JLR</div>
-      <div class="copyright">Todos los derechos reservados</div>
-    </footer>
-  </div>
+    <div class="menu-contenedor">
+        <h1>Menú de Portafolios</h1>
+        <ul class="menu-lista">
+            <li><a href="Portafolio-Juan/index.html">Portafolio Juan</a></li>
+            <li><a href="Portafolio-Costabile/index.html">Portafolio Costabile</a></li>
+        </ul>
+    </div>
 </body>
-  </html>
