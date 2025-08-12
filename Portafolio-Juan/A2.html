@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Práctica 2 - Tabla</title>
+  <link rel="stylesheet" href="css/estilo-A2.css">
+</head>
+<body>
+  <div class="contenedor-principal">
+    <h1>Práctica 2</h1>
+    <button class="btn-volver" onclick="location.href='index.html'">Volver al inicio</button>
+
+    <table aria-label="Tabla de personas">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Edad</th>
+          <th>Ciudades</th>
+          <th>Profesión</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- FILA 1: Ana -->
+        <tr>
+          <td>Ana</td>
+          <td>28</td>
+          <td class="cities">
+            <div class="city-single">Buenos Aires</div>
+          </td>
+          <td rowspan="3">Ingeniero</td>
+        </tr>
+        <!-- FILA 2: Lucas -->
+        <tr>
+          <td>Lucas</td>
+          <td rowspan="2">35</td>
+          <td class="cities">
+            <div class="cities-inner">
+              <div class="city">Córdoba</div>
+              <div class="city">Mendoza</div>
+            </div>
+          </td>
+        </tr>
+        <!-- FILA 3: Martina -->
+        <tr>
+          <td>Martina</td>
+          <td class="cities">
+            <div class="cities-inner">
+              <div class="city">Rosario</div>
+              <div class="city">Córdoba</div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
