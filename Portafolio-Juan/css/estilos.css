@@ -1,0 +1,56 @@
+body {
+    background-color: #fbeee0;
+    font-family: Arial, sans-serif;
+    color: #222;
+    margin: 20px;
+}
+
+.tabla-datos {
+    border-collapse: collapse;
+    width: 50%;
+    margin-bottom: 20px;
+}
+.tabla-datos th, .tabla-datos td {
+    border: 1px solid #bfa;
+    padding: 8px;
+    text-align: center;
+}
+.tabla-datos th {
+    background-color: #cfc;
+}
+
+.img-perfil {
+    border-radius: 50%;
+    border: 3px solid #aaf;
+    margin-bottom: 20px;
+}
+
+#info-extra {
+    background-color: #ffe4b5;
+    padding: 15px;
+    border: 2px dashed #f90;
+    margin-bottom: 20px;
+}
+
+.enlace-secundario {
+    color: #0077cc;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.formulario-contacto {
+    background: #fff;
+    padding: 15px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+
+.lista-hobbies {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 10px 20px;
+    width: 200px;
+}
+.lista-hobbies li {
+    margin-bottom: 5px;
+}
