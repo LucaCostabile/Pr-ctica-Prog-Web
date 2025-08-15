@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <table>
+        <tr>
+            <th>Nombre</th>
+            <th style="border-left: 2px solid white;">Edad</th>
+            <th style="border-left: 2px solid white;">Ciudades</th>
+            <th style="border-left: 2px solid white;">Profesión</th>
+        </tr>
+        <tr>
+            <td>Ana</td>
+            <td>28</td>
+            <td>Buenos Aires</td>
+            <td rowspan="3">Ingeniero</td>
+        </tr>
+        <tr>
+            <td>Lucas</td>
+            <td rowspan="2">35</td>
+            <td>
+                <div class="ciudad-multiple">
+                    <div>Córdoba</div>
+                    <div class="separada">Mendoza</div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Martina</td>
+            <td>
+                <div class="ciudad-multiple">
+                    <div>Rosario</div>
+                    <div class="separada">Córdoba</div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

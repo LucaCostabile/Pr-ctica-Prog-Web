@@ -1,0 +1,27 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f9f9f9;
+    color: #000;
+    margin: 0;
+    padding: 0 20px;
+}
+
+h1, h2, p, ul, li {
+    color: #000;
+}
+
+ul {
+    list-style-type: disc;
+    margin-left: 30px;
+}
+
+a {
+    color: #1565c0;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+a:hover {
+    color: #2ad3a0;
+    text-decoration: underline;
+}

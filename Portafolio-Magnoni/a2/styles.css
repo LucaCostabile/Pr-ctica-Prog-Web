@@ -1,0 +1,41 @@
+table {
+    border-collapse: collapse;
+    width: 80%;
+    margin: 20px auto;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: black;
+    color: white;
+}
+
+/* Elimina el padding solo cuando hay ciudades múltiples para que la línea llegue a los extremos */
+td > .ciudad-multiple {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+
+.ciudad-multiple {
+    display: flex;
+    height: 100%;
+}
+
+.ciudad-multiple > div {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 0 5px;
+}
+
+.ciudad-multiple > .separada {
+    border-left: 1px solid black;
+}
