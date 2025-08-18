@@ -1,1 +1,27 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Práctica a4_3</title>
+    <link rel="stylesheet" href="/css/estilo-A4.css">
+</head>
+<body>
+    <h1>Resultados del Script</h1>
+    
+    <div id="resultados">
+        <h2>1. Buscar numeros repetidos:</h2>
+        <p>Array original: [1,1,2,3,3,4,4,4,5,5,6]</p>
+        <p>Solucion: <span id="cubos"></span></p>
+    </div>
+
+    <script>
+        // Ejercicio
+        let numeros = [1,1,2,3,3,4,4,4,5,5,6]
+        let unicos = [... new Set(numeros)];
+
+        // Mostrar el resultado en el HTML
+        document.getElementById("empleados").textContent = JSON.stringify(agrupados, null, 2);
+    </script>
+</body>
+</html>
