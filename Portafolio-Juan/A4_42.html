@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Práctica a4_4</title>
+    <link rel="stylesheet" href="/css/estilo-A4.css">
+</head>
+<body>
+    <h1>Resultados del Script</h1>
+
+    <div id="resultados">
+        <h2>1. Buscar numeros repetidos:</h2>
+        <p>Array original: entrada = [ [1, 2, 3],[4, 5, 6],[7, 8, 9] ]</p>
+        <p>Solucion 1 Suma fila: <span id="solu1"></span></p>
+        <p>Solucion 2 Suma columna: <span id="solu2"></span></p>
+    </div>
+
+    <script>
+
+    const entrada = [ [1, 2, 3],[4, 5, 6],[7, 8, 9] ]
+    let sumafila = [];
+    let sumacolumna = [];
+    for (let i = 0; i < entrada.length; i++) {
+        let suma = 0;
+        for (let j = 0; j < entrada[i].length; j++) {
+            suma += entrada[i][j];
+        }
+        sumafila.push(suma);
+        sumacolumna[i] = 0;
+        for (let j = 0; j < entrada.length; j++) {
+            sumacolumna[i] += entrada[j][i];
+
+        }
+    }
+    document.getElementById("solu1").innerText = sumafila.join(", ");
+    document.getElementById("solu2").innerText = sumacolumna.join(", ");
+
+
+
+    </script>
+</body>
+</html>
