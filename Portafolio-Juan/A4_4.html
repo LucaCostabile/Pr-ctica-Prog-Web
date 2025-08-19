@@ -13,19 +13,21 @@
         <h2>1. Buscar numeros repetidos:</h2>
         <p>Array original: [1,1,2,3,3,4,4,4,5,5,6]</p>
         <p>Solucion: <span id="cubos"></span></p>
+        <p>Solucion2: <span id="cubos"></span></p>
     </div>
 
     <script>
         // Ejercicio
         let numeros = [1,1,2,3,3,4,4,4,5,5,6]
         let unicos = [... new Set(numeros)];
+        document.getElementById("cubos").textContent = unicos.join(", ");
         let conteo = numeros.reduce((map,p)=> {
             map[p]= (map[p] | | 0)+1;
             return map;
         },{}));
         
         // Mostrar el resultado en el HTML
-        document.getElementById("cubos").textContent = unicos.join(", ");
+        document.getElementById("cubos2").textContent = conteo.join(", ");
     </script>
 </body>
 </html>
