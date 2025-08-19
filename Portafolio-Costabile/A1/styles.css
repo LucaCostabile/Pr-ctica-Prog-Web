@@ -1,0 +1,70 @@
+body {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+}
+
+/* Bordes y separación general */
+header, nav, main, section, article, aside, footer {
+    border: 1px solid #aaa;
+    padding: 10px;
+}
+
+/* Separar cada bloque */
+header, nav, main, footer {
+    margin: 8px;
+}
+
+/* Encabezado */
+header h1 {
+    margin: 0 0 4px 0;
+}
+
+/* Navegación */
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    margin: 4px 0;
+}
+
+a {
+    text-decoration: none;
+    color: blue;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* MAIN → SECTION + ASIDE en columnas */
+.contenido-principal {
+    display: flex;
+    gap: 10px; /* Espacio entre section y aside */
+}
+
+/* La sección ocupa más espacio que el aside */
+section {
+    flex: 3;
+}
+
+aside {
+    flex: 1;
+}
+
+/* Artículos */
+article {
+    border: 1px solid #aaa;
+    padding: 6px;
+    margin-bottom: 8px;
+}
+
+/* Footer */
+footer {
+    text-align: left;
+    font-size: 0.85em;
+}
