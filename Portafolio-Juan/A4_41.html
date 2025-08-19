@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Práctica a4_4</title>
+    <link rel="stylesheet" href="/css/estilo-A4.css">
+</head>
+<body>
+    <h1>Resultados del Script</h1>
+
+    <div id="resultados">
+        <h2>1. Buscar numeros repetidos:</h2>
+        <p>Array original: const estudiantes = [
+            { nombre: "Ana", nota: 8 },
+            { nombre: "Luis", nota: 5 },
+            { nombre: "Carla", nota: 9 },
+            { nombre: "Juan", nota: 6 },
+            { nombre: "Pedro", nota: 4 }
+            ];</p>
+        <p>Solucion 1 aprobados: <span id="solu1"></span></p>
+        <p>Solucion 2 ordenamiento mayor a menor: <span id="solu2"></span></p>
+        <p>Solucion 3 Calcular el promedio general de las notas: <span id="solu3"></span></p>
+    </div>
+
+    <script>
+
+    const estudiantes = [
+        { nombre: "Ana", nota: 8 },
+        { nombre: "Luis", nota: 5 },
+        { nombre: "Carla", nota: 9 },
+        { nombre: "Juan", nota: 6 },
+        { nombre: "Pedro", nota: 4 }
+        ];
+     let aprobados = estudiantes.filter(estudiante => estudiante.nota >= 6);
+    ordenamiento = aprobados.sort((a, b) => b.nota - a.nota);
+    promedio = ordenamiento.reduce((acumulador, estudiante) => acumulador + estudiante.nota, 0) / ordenamiento.length;
+    document.getElementById("solu1").innerText = aprobados.map(estudiante => estudiante.nombre).join(", ");
+    document.getElementById("solu2").innerText = ordenamiento.map(estudiante => `${estudiante.nombre} (${estudiante.nota})`).join(", ");
+    document.getElementById("solu3").innerText = promedio.toFixed(2);
+
+    </script>
+</body>
+</html>
