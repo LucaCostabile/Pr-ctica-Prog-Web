@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Práctica a4_4</title>
+    <link rel="stylesheet" href="/css/estilo-A4.css">
+</head>
+<body>
+    <h1>Resultados del Script</h1>
+
+    <div id="resultados">
+        <h2>1. Buscar numeros repetidos:</h2>
+        <p>Array original: entrada = [ [1, 2, 3],[4, 5, 6] ]</p>
+        <p>Solucion 1 diagonalPrincipal: <span id="solu1"></span></p>
+        <p>Solucion 2 diagonalSecundaria: <span id="solu2"></span></p>
+        <p>Solucion 2 Suma de ambas: <span id="solu3"></span></p>
+    </div>
+
+    <script>
+
+    const matriz = [ [1, 2, 3],[4, 5, 6] ]
+    let diagonalPrincipal = [];
+    let diagonalSecundaria = [];
+    let sumadeAmbas = [];
+    for (let i = 0; i < matriz.length; i++) {
+        diagonalPrincipal.push(matriz[i][i]);
+        diagonalSecundaria.push(matriz[i][matriz.length - 1 - i]);
+        sumadeAmbas.push(diagonalPrincipal[i] + diagonalSecundaria[i]);
+    }
+    document.getElementById("solu1").innerText = diagonalPrincipal.join(", ");
+    document.getElementById("solu2").innerText = diagonalSecundaria.join(", ");
+    document.getElementById("solu3").innerText = sumadeAmbas.join(", ");
+
+
+
+    </script>
+</body>
+</html>
