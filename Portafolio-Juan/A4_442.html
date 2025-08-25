@@ -31,9 +31,7 @@ const limpiarEspacios = str => str.trim();
 const encriptar = str => str.split('')
            .map(c => String.fromCharCode(c.charCodeAt(0) + 1)).join("");
 
-const pipelineNombre = crearPipeline(limpiarEspacios, capitalizar);
-const pipelineClave = crearPipeline(limpiarEspacios, encriptar);
-      
+
 // ----- Función de orden superior que recibe funciones de primer orden -----
 function crearPipeline(...funciones) {
   return function(valor) {
@@ -41,6 +39,9 @@ function crearPipeline(...funciones) {
   };
 }
 
+const pipelineNombre = crearPipeline(limpiarEspacios, capitalizar);
+const pipelineClave = crearPipeline(limpiarEspacios, encriptar);
+       
 personasProcesados = conjutoPersonas.map(c => ({
   nombre: pipelineNombre(c.nombre),
   clave: pipelineClave(c.clave)
