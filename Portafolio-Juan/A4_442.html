@@ -15,11 +15,10 @@
     </div>
 
     <script>
-
-    let conjutoPersonas [
-      { nombre: Juan, clave:'hola123'},
-      { nombre: Ana, clava:'1234'}
-   ]
+const conjutoPersonas [
+      { nombre: Juan, clave:"hola123"},
+      { nombre: Ana, clava:"1234"}
+   ];
   
 // 1. Función que capitaliza un string
 const capitalizar = str => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
@@ -42,7 +41,7 @@ function crearPipeline(...funciones) {
 const pipelineNombre = crearPipeline(limpiarEspacios, capitalizar);
 const pipelineClave = crearPipeline(limpiarEspacios, encriptar);
        
-personasProcesados = conjutoPersonas.map(c => ({
+const personasProcesados = conjutoPersonas.map(c => ({
   nombre: pipelineNombre(c.nombre),
   clave: pipelineClave(c.clave)
 }));
