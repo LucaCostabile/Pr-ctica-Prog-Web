@@ -1,55 +1,63 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Práctica a4_4</title>
-    <link rel="stylesheet" href="/css/estilo-A4.css">
+    <title>Práctica a4_4 - Pipeline de Procesamiento</title>
 </head>
 <body>
     <h1>Resultados del Script</h1>
 
     <div id="resultados">
-        <h2>1. Buscar numeros repetidos:</h2>
-        <p>Solucion 2 Suma de ambas: <span id="solu1"></span></p>
+        <h2>1. Procesamiento de datos con pipeline de funciones:</h2>
+        <p>Array original: 
+            <span id="original"></span>
+        </p>
+        <p>Array procesado: 
+            <span id="procesado"></span>
+        </p>
+        <h3>Detalles del procesamiento:</h3>
+        <ul>
+            <li>Capitalización: Convierte la primera letra en mayúscula y el resto en minúsculas</li>
+            <li>Limpieza: Elimina espacios en blanco al inicio y final</li>
+            <li>Encriptación: Aumenta en 1 el código ASCII de cada carácter</li>
+        </ul>
     </div>
 
     <script>
-const conjutoPersonas [
-      { nombre: Juan, clave:"hola123"},
-      { nombre: Ana, clava:"1234"}
-   ];
-  
-// 1. Función que capitaliza un string
-const capitalizar = str => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+        // Datos originales (corregidos)
+        const conjuntoPersonas = [
+            { nombre: "  juan  ", clave: "hola123" },
+            { nombre: "  ana  ", clave: "1234" }
+        ];
+        
+        // 1. Función que capitaliza un string
+        const capitalizar = str => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 
-// 2. Función que elimina espacios en blanco
-const limpiarEspacios = str => str.trim();
-      
-// 3. Función que encripta un string de forma simple
-const encriptar = str => str.split('')
-           .map(c => String.fromCharCode(c.charCodeAt(0) + 1)).join("");
+        // 2. Función que elimina espacios en blanco
+        const limpiarEspacios = str => str.trim();
+              
+        // 3. Función que encripta un string de forma simple
+        const encriptar = str => str.split('')
+                   .map(c => String.fromCharCode(c.charCodeAt(0) + 1)).join("");
 
+        // Función de orden superior que recibe funciones de primer orden
+        function crearPipeline(...funciones) {
+          return function(valor) {
+            return funciones.reduce((acc, fn) => fn(acc), valor);
+          };
+        }
 
-// ----- Función de orden superior que recibe funciones de primer orden -----
-function crearPipeline(...funciones) {
-  return function(valor) {
-    return funciones.reduce((acc, fn) => fn(acc), valor); //el acc se inicializa con valor
-  };
-}
-
-const pipelineNombre = crearPipeline(limpiarEspacios, capitalizar);
-const pipelineClave = crearPipeline(limpiarEspacios, encriptar);
-       
-const personasProcesados = conjutoPersonas.map(c => ({
-  nombre: pipelineNombre(c.nombre),
-  clave: pipelineClave(c.clave)
-}));
-console.log("Personas procesados:");
-console.log(personasProcesados);
-
-      
-document.getElementById("solu1").innerText = personasProcesados.join(", ");
+        const pipelineNombre = crearPipeline(limpiarEspacios, capitalizar);
+        const pipelineClave = crearPipeline(limpiarEspacios, encriptar);
+               
+        const personasProcesadas = conjuntoPersonas.map(c => ({
+          nombre: pipelineNombre(c.nombre),
+          clave: pipelineClave(c.clave)
+        }));
+        
+        // Mostrar resultados en el DOM
+        document.getElementById("original").innerText = JSON.stringify(conjuntoPersonas);
+        document.getElementById("procesado").innerText = JSON.stringify(personasProcesadas);
     </script>
 </body>
 </html>
