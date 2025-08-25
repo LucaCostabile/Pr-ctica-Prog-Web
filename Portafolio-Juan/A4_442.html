@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Práctica a4_4</title>
+    <link rel="stylesheet" href="/css/estilo-A4.css">
+</head>
+<body>
+    <h1>Resultados del Script</h1>
+
+    <div id="resultados">
+        <h2>1. Buscar numeros repetidos:</h2>
+        <p> Objeto: </span></p>
+    </div>
+
+    <script>
+
+    let conjutoPersonas [
+      { nombre: Juan, clave:'hola123'},
+      { nombre: Ana, clava:'1234'}
+   ]
+  
+// 1. Función que capitaliza un string
+const capitalizar = str => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+
+// 2. Función que elimina espacios en blanco
+const limpiarEspacios = str => str.trim();
+      
+// 3. Función que encripta un string de forma simple
+const encriptar = str => str.split('')
+           .map(c => String.fromCharCode(c.charCodeAt(0) + 1)).join("");
+
+const pipelineNombre = crearPipeline(limpiarEspacios, capitalizar);
+const pipelineClave = crearPipeline(limpiarEspacios, encriptar);
+      
+// ----- Función de orden superior que recibe funciones de primer orden -----
+function crearPipeline(...funciones) {
+  return function(valor) {
+    return funciones.reduce((acc, fn) => fn(acc), valor); //el acc se inicializa con valor
+  };
+}
+
+personasProcesados = conjutoPersonas.map(c => ({
+  nombre: pipelineNombre(c.nombre),
+  clave: pipelineClave(c.clave)
+}));
+console.log("Personas procesados:");
+console.log(conjutoPersonas);
+
+      
+document.getElementById("solu1").innerText = diagonalPrincipal.join(", "
+    </script>
+</body>
+</html>
