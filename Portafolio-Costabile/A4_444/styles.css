@@ -1,0 +1,10 @@
+body { font-family: Arial, sans-serif; margin: 20px; background: #fff; }
+#titulo-principal { color: #2c3e50; text-align: center; margin-bottom: 10px; }
+.login-form { max-width: 360px; margin: 0 auto; }
+.login-form div { margin-bottom: 10px; }
+.login-form label { display: block; margin-bottom: 4px; }
+.login-form input { width: 100%; padding: 8px; box-sizing: border-box; }
+.login-form button { padding: 8px 12px; }
+.resultado { padding: 8px; margin-top: 10px; }
+.error { background: #ffe6e6; border: 1px solid #ff4d4d; color: #800; }
+.ok { background: #e6ffea; border: 1px solid #3cb371; color: #134a1b; }
