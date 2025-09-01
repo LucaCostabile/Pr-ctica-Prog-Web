@@ -25,14 +25,31 @@
     </section>
 
     <section class="panel">
+      <h2>Ruedas y Títulos</h2>
+      <div class="row">
+        <input id="rueda-marca" placeholder="Marca de rueda">
+        <input id="rueda-rodaje" placeholder="Rodaje (ej: 0 km)">
+        <button id="crear-rueda">Crear plantilla de rueda</button>
+        <div id="ruedas-list" class="list" style="min-width:200px"></div>
+      </div>
+      <div class="row" style="margin-top:8px">
+        <input id="titulo-propietario" placeholder="Propietario del título">
+        <button id="crear-titulo">Crear Título</button>
+        <div id="titulos-list" class="list" style="min-width:200px"></div>
+      </div>
+    </section>
+
+    <section class="panel">
       <h2>Crear Auto</h2>
       <div class="row">
         <input id="auto-marca" placeholder="Marca">
         <input id="auto-modelo" placeholder="Modelo">
         <input id="auto-anio" placeholder="Año" type="number">
         <input id="auto-puertas" placeholder="Cantidad de puertas" type="number">
-        <select id="auto-motor"></select>
-        <button id="crear-auto">Crear Auto</button>
+  <select id="auto-motor"></select>
+  <select id="auto-rueda"></select>
+  <select id="auto-titulo"></select>
+  <button id="crear-auto">Crear Auto</button>
       </div>
     </section>
 
@@ -44,8 +61,10 @@
         <input id="camion-anio" placeholder="Año" type="number">
         <input id="camion-capacidad" placeholder="Capacidad de carga (kg)" type="number">
         <label><input id="camion-frigorifico" type="checkbox"> Frigorífico</label>
-        <select id="camion-motor"></select>
-        <button id="crear-camion">Crear Camión</button>
+  <select id="camion-motor"></select>
+  <select id="camion-rueda"></select>
+  <select id="camion-titulo"></select>
+  <button id="crear-camion">Crear Camión</button>
       </div>
     </section>
 
