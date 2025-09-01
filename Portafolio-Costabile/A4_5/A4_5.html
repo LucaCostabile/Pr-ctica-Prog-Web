@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ejercicio A4_5 - UML a JavaScript</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header>
+    <h1 id="titulo-principal">Ejercicio A4_5 - UML / JavaScript</h1>
+  </header>
+
+  <main>
+    <section class="panel">
+      <h2>Crear Motor</h2>
+      <div class="row">
+        <input id="motor-tipo" placeholder="Tipo (ej: Diesel)">
+        <input id="motor-caballos" placeholder="Caballos" type="number">
+        <input id="motor-desc" placeholder="Descripción">
+        <button id="crear-motor">Crear Motor</button>
+      </div>
+      <div id="motores-list" class="list"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Crear Auto</h2>
+      <div class="row">
+        <input id="auto-marca" placeholder="Marca">
+        <input id="auto-modelo" placeholder="Modelo">
+        <input id="auto-anio" placeholder="Año" type="number">
+        <input id="auto-puertas" placeholder="Cantidad de puertas" type="number">
+        <select id="auto-motor"></select>
+        <button id="crear-auto">Crear Auto</button>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Crear Camión</h2>
+      <div class="row">
+        <input id="camion-marca" placeholder="Marca">
+        <input id="camion-modelo" placeholder="Modelo">
+        <input id="camion-anio" placeholder="Año" type="number">
+        <input id="camion-capacidad" placeholder="Capacidad de carga (kg)" type="number">
+        <label><input id="camion-frigorifico" type="checkbox"> Frigorífico</label>
+        <select id="camion-motor"></select>
+        <button id="crear-camion">Crear Camión</button>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Concesionario</h2>
+      <div class="row">
+        <input id="nombre-concesionario" placeholder="Nombre del concesionario" value="Concesionario Demo">
+        <button id="crear-concesionario">Crear/Seleccionar</button>
+      </div>
+      <div id="concesionario-info" class="list"></div>
+      <div id="vehiculos-list" class="list"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p><a href="../index.html">Volver al menú</a></p>
+  </footer>
+</body>
+</html>

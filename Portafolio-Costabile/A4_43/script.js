@@ -1,4 +1,3 @@
-// Matriz cuadrada de ejemplo
 const matriz = [
   [2, 7, 3],
   [4, 5, 6],
@@ -22,16 +21,12 @@ const diagonalSecundaria = obtenerDiagonalSecundaria(matriz);
 const sumaDiagonales = sumaArray(diagonalPrincipal) + sumaArray(diagonalSecundaria);
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Mostrar matriz
   const tabla = document.getElementById('tabla-matriz');
   tabla.innerHTML = matriz.map(fila => `<tr>${fila.map(n => `<td>${n}</td>`).join('')}</tr>`).join('');
 
-  // Mostrar diagonal principal
   document.getElementById('diagonal-principal').innerHTML = `<strong>Diagonal principal:</strong> [${diagonalPrincipal.join(', ')}]`;
 
-  // Mostrar diagonal secundaria
   document.getElementById('diagonal-secundaria').innerHTML = `<strong>Diagonal secundaria:</strong> [${diagonalSecundaria.join(', ')}]`;
 
-  // Mostrar suma de diagonales
   document.getElementById('suma-diagonales').innerHTML = `<strong>Suma de ambas diagonales:</strong> ${sumaDiagonales}`;
 });

@@ -1,20 +1,16 @@
-// Arreglo de ejemplo
 const usuarios = [
   { nombre: 'ana', clave: 'abc123' },
   { nombre: 'juan pérez', clave: 'secret' },
   { nombre: 'maria', clave: 'qwerty' }
 ];
 
-// Función para capitalizar cada palabra del nombre
 function capitalizarNombre(nombre) {
   return nombre.split(' ').map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(' ');
 }
 
-// Funcion simple para "encriptar" clave: desplazar chars por 3 (Caesar simple)
 function encriptarClave(clave) {
   return clave.split('').map(ch => {
     const code = ch.charCodeAt(0);
-    // Sólo transformar letras y dígitos de forma sencilla
     if (code >= 48 && code <= 57) { // 0-9
       return String.fromCharCode(((code - 48 + 3) % 10) + 48);
     }
@@ -28,7 +24,6 @@ function encriptarClave(clave) {
   }).join('');
 }
 
-// Aplicar funciones de orden superior con map
 function procesarUsuarios(arr) {
   return arr.map(u => ({
     nombre: capitalizarNombre(u.nombre),

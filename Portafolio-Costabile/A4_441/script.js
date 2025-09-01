@@ -1,4 +1,4 @@
-// Objeto Libro (constructor funcional)
+
 function Libro(titulo, autor, anio) {
   this.titulo = titulo;
   this.autor = autor;
@@ -9,7 +9,7 @@ Libro.prototype.descripcion = function() {
   return `${this.titulo} — ${this.autor} (${this.anio})`;
 };
 
-// Objeto cuentaBancaria
+
 function CuentaBancaria(titular, saldoInicial = 0) {
   this.titular = titular;
   this.saldo = saldoInicial;
@@ -27,7 +27,7 @@ CuentaBancaria.prototype.retirar = function(monto) {
   return true;
 };
 
-// Objeto Rectangulo
+
 function Rectangulo(ancho, alto) {
   this.ancho = ancho;
   this.alto = alto;

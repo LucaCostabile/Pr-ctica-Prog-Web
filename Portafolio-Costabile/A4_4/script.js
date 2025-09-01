@@ -1,10 +1,7 @@
-// Arreglo de 20 números inventados
 const numeros = [5, 3, 8, 2, 5, 9, 3, 5, 7, 8, 2, 5, 3, 9, 1, 3, 8, 6, 3, 5];
 
-// Mostrar arreglo
 document.getElementById("arreglo").textContent = numeros.join(", ");
 
-// Calcular el número más repetido
 const frecuencia = {};
 
 numeros.forEach(num => {

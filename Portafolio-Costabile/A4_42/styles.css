@@ -1,31 +1,22 @@
-/* ====== ESTILOS GENERALES ====== */
-body {
-  font-family: Arial, sans-serif;
-  margin: 20px;
-  background-color: #f9f9f9;
+:root{
+  --bg:#f7f9fc;
+  --card:#ffffff;
+  --primary:#2c3e50;
+  --accent:#3498db;
+  --muted:#6b7785;
+}
+body{
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  margin:20px;
+  background:var(--bg);
+  color:var(--primary);
 }
 
-#titulo-principal {
-  color: #2c3e50;
-  text-align: center;
-  font-size: 2em;
-  margin-bottom: 20px;
-}
+#titulo-principal{ text-align:center; font-size:1.9rem; margin-bottom:18px; }
 
-.resultado {
-  background: #f0f8ff;
-  border: 1px solid #3498db;
-  padding: 10px;
-  margin-bottom: 20px;
-  text-align: center;
-}
+.resultado{ background:linear-gradient(180deg,#fbfdff,#f0f8ff); border:1px solid var(--accent); padding:12px; margin-bottom:18px; border-radius:6px; box-shadow:0 1px 3px rgba(44,62,80,0.05); }
 
-.matriz {
-  margin: 0 auto 20px auto;
-  border-collapse: collapse;
-}
-.matriz td, .matriz th {
-  border: 1px solid #ccc;
-  padding: 8px 12px;
-  text-align: center;
-}
+.matriz{ margin:0 auto 20px; border-collapse:collapse; background:var(--card); border-radius:6px; overflow:hidden; box-shadow:0 2px 6px rgba(44,62,80,0.04); }
+.matriz td, .matriz th{ border-bottom:1px solid #e6e9ec; padding:10px 14px; text-align:center; }
+.matriz th{ background:#f6fbff; font-weight:600; color:var(--primary); }
+

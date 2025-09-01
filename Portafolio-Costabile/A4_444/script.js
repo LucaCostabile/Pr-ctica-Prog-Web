@@ -3,7 +3,6 @@ const usuarioInput = document.getElementById('usuario');
 const contrInput = document.getElementById('contrasena');
 const mensaje = document.getElementById('mensaje');
 
-// Usuario válido de ejemplo
 const USUARIO_VALIDO = { usuario: 'luca', contrasena: '1234' };
 let intentos = 0;
 

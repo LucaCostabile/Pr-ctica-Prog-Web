@@ -1,4 +1,6 @@
-body { font-family: Arial, sans-serif; margin: 20px; background-color: #f9f9f9; }
-#titulo-principal { color: #2c3e50; text-align: center; font-size: 2em; margin-bottom: 20px; }
-.resultado { background: #f0f8ff; border: 1px solid #3498db; padding: 10px; margin-bottom: 20px; white-space: pre-wrap; }
-a { color: #2c3e50; text-decoration: none; }
+:root{ --bg:#f7f9fc; --card:#fff; --primary:#2c3e50; --accent:#3498db; }
+body{ font-family:'Segoe UI', Roboto, Arial; margin:20px; background:var(--bg); color:var(--primary); }
+#titulo-principal{ text-align:center; font-size:1.9rem; margin-bottom:18px; }
+.resultado{ background:linear-gradient(180deg,#fbfdff,#f0f8ff); border:1px solid var(--accent); padding:12px; margin-bottom:18px; white-space:pre-wrap; border-radius:6px; }
+a{ color:var(--primary); text-decoration:none }
+

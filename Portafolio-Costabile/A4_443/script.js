@@ -17,7 +17,6 @@ function crearItem(texto) {
   btnCheck.title = 'Marcar como completada';
   btnCheck.addEventListener('click', () => {
     li.classList.toggle('completada');
-    // Cambiar atributo data-completa para observar cambios en atributos
     li.setAttribute('data-completa', li.classList.contains('completada') ? 'true' : 'false');
   });
 
@@ -42,7 +41,6 @@ btnAgregar.addEventListener('click', () => {
   input.value = '';
 });
 
-// MutationObserver para registrar cambios en el DOM
 const observer = new MutationObserver((mutationsList) => {
   mutationsList.forEach(m => {
     if (m.type === 'childList') {
