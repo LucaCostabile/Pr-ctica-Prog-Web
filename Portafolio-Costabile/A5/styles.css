@@ -1,0 +1,12 @@
+:root{
+  --bg: #fff;
+  --text: #111;
+  --accent: #222;
+}
+body{ font-family: Georgia, 'Times New Roman', Times, serif; background: var(--bg); color: var(--text); }
+.container{ max-width:760px; padding:24px; margin:30px; }
+#contador-display{ font-size:34px; font-weight:700; margin-bottom:16px; }
+.controls{ margin-bottom:12px; }
+button{ padding:8px 12px; margin-right:8px; border:1px solid #666; background:#f5f5f5; cursor:pointer; }
+button:active{ transform:translateY(1px); }
+.nota{ margin-top:18px; }
