@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login simple</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding:20px; max-width:420px }
+    label { display:block; margin-top:8px }
+    input { width:100%; padding:8px; box-sizing:border-box }
+    button { margin-top:12px; padding:8px 12px }
+    .error { color:#b00; margin-top:8px }
+    .info { margin-top:8px; color:#555 }
+    .blocked { background:#eee; color:#999 }
+  </style>
+</head>
+<body>
+  <h1>Login</h1>
+  <form id="loginForm" autocomplete="off">
+    <label for="user">Usuario</label>
+    <input id="user" name="user" type="text" />
+
+    <label for="pass">Contraseña</label>
+    <input id="pass" name="pass" type="password" />
+
+    <button id="submitBtn" type="submit">Entrar</button>
+  </form>
+
+  <div id="msg" class="error" aria-live="polite"></div>
+  <div id="info" class="info"></div>
+
+  <script>
+    // Usuario válido hardcodeado (simple para replicar)
+    const VALID_USER = 'usuario1';
+    const VALID_PASS = 'clave123';
+
+    const form = document.getElementById('loginForm');
+    const userInput = document.getElementById('user');
+    const passInput = document.getElementById('pass');
+    const msg = document.getElementById('msg');
+    const info = document.getElementById('info');
+    const submitBtn = document.getElementById('submitBtn');
+
+    let attempts = 0;
+    const MAX_ATTEMPTS = 3;
+
+    function setBlocked(state) {
+      if (state) {
+        submitBtn.disabled = true;
+        submitBtn.classList.add('blocked');
+        msg.textContent = 'Se ha bloqueado el login tras 3 intentos. Intenta más tarde.';
+      } else {
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('blocked');
+        msg.textContent = '';
+      }
+    }
+
+    function updateInfo() {
+      info.textContent = `Intentos: ${attempts} / ${MAX_ATTEMPTS}`;
+    }
+
+    // Inicial
+    updateInfo();
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      msg.textContent = '';
+
+      const u = userInput.value.trim();
+      const p = passInput.value;
+
+      // Validar campos completos
+      if (!u || !p) {
+        msg.textContent = 'Completa ambos campos.';
+        return;
+      }
+
+      // Comprobar credenciales
+      if (u === VALID_USER && p === VALID_PASS) {
+        msg.style.color = 'green';
+        msg.textContent = 'Login correcto. Bienvenido.';
+        attempts = 0; updateInfo();
+        // aquí podrías redirigir; mantengo simple
+        return;
+      }
+
+      // Credenciales incorrectas
+      attempts += 1;
+      msg.style.color = '#b00';
+      msg.textContent = 'Usuario o contraseña incorrectos.';
+      updateInfo();
+
+      if (attempts >= MAX_ATTEMPTS) {
+        setBlocked(true);
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,63 +1,121 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Práctica a4_4 - Pipeline de Procesamiento</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Modelo UML a JavaScript (simple)</title>
+	<style>
+		body { font-family: Arial, sans-serif; padding:18px; line-height:1.35 }
+		pre { background:#f7f7f7; border:1px solid #e3e3e3; padding:12px; overflow:auto }
+		h1 { margin:0 0 8px }
+		small { color:#555 }
+	</style>
 </head>
 <body>
-    <h1>Resultados del Script</h1>
+	<h1>UML → JavaScript</h1>
+	<pre id="out"></pre>
 
-    <div id="resultados">
-        <h2>1. Procesamiento de datos con pipeline de funciones:</h2>
-        <p>Array original: 
-            <span id="original"></span>
-        </p>
-        <p>Array procesado: 
-            <span id="procesado"></span>
-        </p>
-        <h3>Detalles del procesamiento:</h3>
-        <ul>
-            <li>Capitalización: Convierte la primera letra en mayúscula y el resto en minúsculas</li>
-            <li>Limpieza: Elimina espacios en blanco al inicio y final</li>
-            <li>Encriptación: Aumenta en 1 el código ASCII de cada carácter</li>
-        </ul>
-    </div>
+	<script>
+		// ===== Clases base =====
+		class Vehiculo {
+			#velocidad = 0; // privada
+			constructor({ marca, modelo, anio, motor, ruedas = [], titulo = null }) {
+				this.marca = marca;
+				this.modelo = modelo;
+				this.anio = anio;
+				this.motor = motor;
+				this.ruedas = ruedas;
+				this.titulo = titulo;
+			}
+			get velocidad() { return this.#velocidad; }
+			acelerar(delta = 10) { this.#velocidad = Math.max(0, this.#velocidad + delta); return this.#velocidad; }
+			frenar(delta = 10) { this.#velocidad = Math.max(0, this.#velocidad - delta); return this.#velocidad; }
+			compararVelocidad(otro) {
+				if (!(otro instanceof Vehiculo)) throw new Error('Comparar con un Vehiculo');
+				return Math.sign(this.#velocidad - otro.#velocidad);
+			}
+			info() {
+				const m = this.motor ? `${this.motor.tipo || 'motor'} ${this.motor.caballos || ''}HP` : 'sin motor';
+				return `Vehículo ${this.marca} ${this.modelo} (${this.anio}) vel=${this.#velocidad}km/h, ${m}`;
+			}
+			agregarRueda(rueda) { this.ruedas.push(rueda); }
+		}
 
-    <script>
-        // Datos originales (corregidos)
-        const conjuntoPersonas = [
-            { nombre: "  juan  ", clave: "hola123" },
-            { nombre: "  ana  ", clave: "1234" }
-        ];
-        
-        // 1. Función que capitaliza un string
-        const capitalizar = str => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+		class Auto extends Vehiculo {
+			constructor({ cantPuertas = 4, ...rest }) { super(rest); this.cantPuertas = cantPuertas; }
+			info() { return `${super.info()} | puertas=${this.cantPuertas}`; }
+		}
 
-        // 2. Función que elimina espacios en blanco
-        const limpiarEspacios = str => str.trim();
-              
-        // 3. Función que encripta un string de forma simple
-        const encriptar = str => str.split('')
-                   .map(c => String.fromCharCode(c.charCodeAt(0) + 1)).join("");
+		class Camion extends Vehiculo {
+			constructor({ capacidadCarga = 0, remolque = null, ...rest }) {
+				super(rest);
+				this.capacidadCarga = capacidadCarga;
+				this.remolque = remolque;
+			}
+			cargar(peso) { return peso <= this.capacidadCarga; }
+			info() {
+				const base = `${super.info()} | capacidad=${this.capacidadCarga}kg`;
+				return this.remolque ? `${base} | ${this.remolque.info()}` : base;
+			}
+		}
 
-        // Función de orden superior que recibe funciones de primer orden
-        function crearPipeline(...funciones) {
-          return function(valor) {
-            return funciones.reduce((acc, fn) => fn(acc), valor);
-          };
-        }
+		class Rueda { constructor(marca, rodaje) { this.marca = marca; this.rodaje = rodaje; } info(){ return `Rueda ${this.marca} (${this.rodaje})`; } }
+		class Remolque { constructor(longitud) { this.longitud = longitud; } info(){ return `Remolque ${this.longitud}m`; } }
+		class Frigorifico extends Remolque { constructor(longitud, temperatura){ super(longitud); this.temperatura = temperatura; } info(){ return `Frigorífico ${this.longitud}m @ ${this.temperatura}°C`; } }
 
-        const pipelineNombre = crearPipeline(limpiarEspacios, capitalizar);
-        const pipelineClave = crearPipeline(limpiarEspacios, encriptar);
-               
-        const personasProcesadas = conjuntoPersonas.map(c => ({
-          nombre: pipelineNombre(c.nombre),
-          clave: pipelineClave(c.clave)
-        }));
-        
-        // Mostrar resultados en el DOM
-        document.getElementById("original").innerText = JSON.stringify(conjuntoPersonas);
-        document.getElementById("procesado").innerText = JSON.stringify(personasProcesadas);
-    </script>
+		class Concesionario {
+			constructor(nombre) { this.nombre = nombre; this.vehiculos = []; }
+			agregarVehiculo(v) { if (v instanceof Vehiculo) this.vehiculos.push(v); }
+			listar() { return this.vehiculos.map(v => ' - ' + v.info()).join('\n'); }
+		}
+
+		class Titulo { constructor(prop) { this.prop = prop; } }
+		class Fabrica {
+			constructor(nombre) { this.nombre = nombre; }
+			construirAuto(opts) { return new Auto(opts); }
+			construirCamion(opts) { return new Camion(opts); }
+		}
+		class RNA { 
+			constructor(provincia) { this.provincia = provincia; this.vehiculos = []; }
+			registrar(v) { if (v instanceof Vehiculo) this.vehiculos.push(v); }
+			info() { return `RNA ${this.provincia}: ${this.vehiculos.length} vehículos registrados`; }
+		}
+
+		// ===== Demo simple para ver todo funcionando =====
+		const out = document.getElementById('out');
+		const log = (t = '') => out.textContent += t + '\n';
+
+		// Objetos auxiliares
+		const ruedasAuto = [1,2,3,4].map(() => new Rueda('Pirelli', 'PZero'));
+		const ruedasCamion = [1,2,3,4,5,6].map(() => new Rueda('Michelin', 'X Multi'));
+
+		const motorAuto = { tipo: 'nafta', caballos: 120, descripcion: '1.6L 16v' };
+		const motorCamion = { tipo: 'diésel', caballos: 420, descripcion: '12.8L' };
+
+		const tituloAuto = new Titulo('Ana Pérez');
+		const tituloCamion = new Titulo('Transp. Sur');
+
+		const fabrica = new Fabrica('Fábrica Genérica');
+		const auto = fabrica.construirAuto({ marca: 'Ford', modelo: 'Focus', anio: 2018, motor: motorAuto, ruedas: ruedasAuto, titulo: tituloAuto, cantPuertas: 5 });
+		const remolqueFrio = new Frigorifico(12, -18);
+		const camion = fabrica.construirCamion({ marca: 'Scania', modelo: 'R450', anio: 2021, motor: motorCamion, ruedas: ruedasCamion, titulo: tituloCamion, capacidadCarga: 18000, remolque: remolqueFrio });
+
+		auto.acelerar(60);
+		camion.acelerar(40);
+		log(auto.info());
+		log(camion.info());
+		log(`Comparar velocidades (auto vs camión): ${auto.compararVelocidad(camion)}`);
+		log(`¿Camión puede cargar 15.000kg? ${camion.cargar(15000)}`);
+
+		const concesionario = new Concesionario('Concesionario Central');
+		concesionario.agregarVehiculo(auto);
+		concesionario.agregarVehiculo(camion);
+		log('\n' + concesionario.nombre);
+		log(concesionario.listar());
+
+		const rna = new RNA('Mendoza');
+		rna.registrar(auto); rna.registrar(camion);
+		log('\n' + rna.info());
+	</script>
 </body>
-  </html>
+</html>
