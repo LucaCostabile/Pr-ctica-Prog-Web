@@ -1,29 +1,64 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Práctica a4_4</title>
-    <link rel="stylesheet" href="/css/estilo-A4.css">
+  <meta charset="UTF-8" />
+  <title>Práctica A4_441</title>
+  <link rel="stylesheet" href="/css/estilo-A4.css" />
 </head>
 <body>
-    <h1>Resultados del Script</h1>
+  <h1>Resultados del Script</h1>
 
-    <div id="resultados">
-        <h2>1. Buscar numeros repetidos:</h2>
-        <p> Object: <span id="solu3"></span></p>
-    </div>
+  <div id="resultados">
+    <h2>1) Libro</h2>
+    <p>Descripción: <span id="solu3"></span></p>
 
-    <script>
-     let libro = {
-       Titulo : "El señor de los anillos",
-       Autor : "Raul",
-       Año: 2003,
-       fuction Descripción (){
-         consolo.log(this.Titulo + " " + this.Autor + " " + this.año)
-       }
-     }
-     
-    </script>
+    <h2>2) Cuenta Bancaria</h2>
+    <p id="cuentaOut"></p>
+
+    <h2>3) Rectángulo</h2>
+    <p id="rectOut"></p>
+  </div>
+
+  <script>
+    // 1) Objeto Libro
+    const libro = {
+      titulo: 'El Señor de los Anillos',
+      autor: 'J. R. R. Tolkien',
+      anio: 1954,
+      descripcion() {
+        return `${this.titulo} - ${this.autor} (${this.anio})`;
+      }
+    };
+    document.getElementById('solu3').textContent = libro.descripcion();
+
+    // 2) Objeto cuentaBancaria
+    const cuentaBancaria = {
+      titular: 'Juan Pérez',
+      saldo: 1000,
+      depositar(monto) {
+        if (monto <= 0 || isNaN(monto)) return 'Monto inválido';
+        this.saldo += monto; return `Depósito $${monto}. Saldo: $${this.saldo}`;
+      },
+      retirar(monto) {
+        if (monto <= 0 || isNaN(monto)) return 'Monto inválido';
+        if (monto > this.saldo) return 'Fondos insuficientes';
+        this.saldo -= monto; return `Retiro $${monto}. Saldo: $${this.saldo}`;
+      }
+    };
+    // Demo simple
+    const ops = [];
+    ops.push(cuentaBancaria.depositar(200));
+    ops.push(cuentaBancaria.retirar(500));
+    document.getElementById('cuentaOut').textContent = `${cuentaBancaria.titular}. ${ops.join(' | ')}`;
+
+    // 3) Objeto Rectangulo
+    const rectangulo = {
+      ancho: 5,
+      alto: 3,
+      area() { return this.ancho * this.alto; },
+      perimetro() { return 2 * (this.ancho + this.alto); }
+    };
+    document.getElementById('rectOut').textContent = `ancho=${rectangulo.ancho}, alto=${rectangulo.alto}, área=${rectangulo.area()}, perímetro=${rectangulo.perimetro()}`;
+  </script>
 </body>
-  </html>
+</html>
