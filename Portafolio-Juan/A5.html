@@ -20,6 +20,15 @@
 		<button id="reset">Reset</button>
 	</div>
 
+	<hr />
+	<h2>Contador (acepta negativos)</h2>
+	<div class="counter" id="valor2">0</div>
+	<div class="row">
+		<button id="inc2">Incrementar</button>
+		<button id="dec2">Decrementar</button>
+		<button id="reset2">Reset</button>
+	</div>
+
 	<script>
 		let contador = 0;
 		const valor = document.getElementById('valor');
@@ -38,6 +47,24 @@
 		reset.addEventListener('click', () => { contador = 0; render(); });
 
 		render();
+
+		// --- Segundo contador (permite negativos) ---
+		let contador2 = 0;
+		const valor2 = document.getElementById('valor2');
+		const inc2 = document.getElementById('inc2');
+		const dec2 = document.getElementById('dec2');
+		const reset2 = document.getElementById('reset2');
+
+		function render2() {
+			valor2.textContent = String(contador2);
+			// aquí SÍ permitimos negativos, no deshabilitamos nada
+		}
+
+		inc2.addEventListener('click', () => { contador2 += 1; render2(); });
+		dec2.addEventListener('click', () => { contador2 -= 1; render2(); });
+		reset2.addEventListener('click', () => { contador2 = 0; render2(); });
+
+		render2();
 	</script>
 </body>
 </html>
