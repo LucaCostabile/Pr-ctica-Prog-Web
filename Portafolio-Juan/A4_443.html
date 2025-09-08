@@ -3,72 +3,94 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>To-Do simple</title>
+  <title>To-Do List</title>
   <style>
-    /* Estilo mínimo */
-    body { font-family: Arial, sans-serif; padding:16px }
-    input, button { font-size:14px }
-    ul { padding-left:18px }
-    #log { white-space:pre-line; font-family:monospace; margin-top:12px; border-top:1px solid #ddd; padding-top:8px }
+    body { font-family: Arial, sans-serif; padding:16px; max-width:680px }
+    h1 { margin-top:0 }
+    .row { display:flex; gap:8px; margin-bottom:10px }
+    input[type=text]{ flex:1; padding:6px 8px }
+    button { padding:6px 10px; cursor:pointer }
+    ul { list-style:none; padding:0; margin:0 }
+    li { display:flex; align-items:center; justify-content:space-between; gap:8px; border:1px solid #ddd; background:#fff; padding:8px; margin-bottom:8px }
+    li.completed { background:#dff6d8; text-decoration:line-through }
+    .txt { flex:1 }
+    .actions { display:flex; gap:6px }
+    .btn-ok { background:#e8f7ea; border:1px solid #4caf50; color:#2e7d32; padding:2px 6px }
+    .btn-del { background:#fde7e7; border:1px solid #d32f2f; color:#b71c1c; padding:2px 6px }
+    #log { margin-top:16px; white-space:pre-line; font-family:monospace }
   </style>
 </head>
 <body>
-  <h1>To-Do (simple)</h1>
+  <h1>To-Do List</h1>
 
-  <input id="taskInput" placeholder="Escribe una tarea..." />
-  <button id="addBtn">Agregar</button>
+  <div class="row">
+    <input id="taskInput" type="text" placeholder="Escribe una tarea..." />
+    <button id="addBtn">Agregar</button>
+  </div>
 
   <!-- Usamos el id 'contenedor' tal como en tu snippet -->
   <ul id="contenedor"></ul>
 
+  <h2>Registro de cambios en el DOM:</h2>
   <div id="log">Esperando cambios en el DOM...</div>
 
   <script>
-    const contenedor = document.getElementById("contenedor");
+    const contenedor = document.getElementById('contenedor');
     const addBtn = document.getElementById('addBtn');
     const input = document.getElementById('taskInput');
     const log = document.getElementById('log');
 
-    // Función mínima para añadir una tarea (li)
-    function addTask(text) {
+    function pushLog(line){ log.textContent += '\n' + line; }
+
+    // Crear un LI con botones completar/borrar
+    function crearItem(texto, completada=false){
       const li = document.createElement('li');
-      li.textContent = text;
-      contenedor.appendChild(li);
+      if (completada) { li.classList.add('completed'); li.setAttribute('data-completed','true'); }
+
+      const span = document.createElement('span');
+      span.className = 'txt';
+      span.textContent = texto;
+
+      const actions = document.createElement('div');
+      actions.className = 'actions';
+      const ok = document.createElement('button'); ok.className = 'btn-ok'; ok.title='Marcar'; ok.textContent = '✓';
+      const del = document.createElement('button'); del.className = 'btn-del'; del.title='Eliminar'; del.textContent = '✖';
+      actions.append(ok, del);
+
+      li.append(span, actions);
+
+      ok.addEventListener('click', () => {
+        const isCompleted = li.classList.toggle('completed');
+        if (isCompleted) li.setAttribute('data-completed','true');
+        else li.removeAttribute('data-completed');
+      });
+      del.addEventListener('click', () => li.remove());
+
+      return li;
     }
 
-    addBtn.addEventListener('click', () => {
+    function agregarDesdeInput(){
       const v = input.value.trim();
       if (!v) return;
-      addTask(v);
-      input.value = '';
-      input.focus();
-    });
+      contenedor.appendChild(crearItem(v));
+      input.value=''; input.focus();
+    }
 
-    input.addEventListener('keydown', e => { if (e.key === 'Enter') addBtn.click(); });
+    addBtn.addEventListener('click', agregarDesdeInput);
+    input.addEventListener('keydown', e=>{ if(e.key==='Enter') agregarDesdeInput(); });
 
-    // Creamos un observador que detecta cambios en el DOM
+    // Ítems iniciales como en la imagen
+    contenedor.appendChild(crearItem('Ir a la facultad', true));
+    contenedor.appendChild(crearItem('Hacer las compras', false));
+
+    // Observer para childList y attributes (en hijos)
     const observer = new MutationObserver(mutaciones => {
       mutaciones.forEach(m => {
-        // Escribimos un texto breve en el log; mantenemos el formato simple
-        if (m.type === 'childList') {
-          log.textContent += '\nCambio: childList en UL';
-        } else if (m.type === 'attributes') {
-          log.textContent += '\nCambio: attributes en ' + (m.target.tagName || 'elemento');
-        } else {
-          log.textContent += '\nCambio: ' + m.type;
-        }
+        if (m.type === 'childList') pushLog('Cambio: childList en UL');
+        else if (m.type === 'attributes') pushLog('Cambio: attributes en LI');
       });
     });
-
-    // Configuramos qué queremos observar (igual que en tu snippet)
-    observer.observe(contenedor, { childList: true, attributes: true });
-
-    // Muestra de agregado dinámico opcional (puedes quitarlo). Lo dejo comentado.
-    // setTimeout(() => {
-    //   const nuevo = document.createElement('p');
-    //   nuevo.textContent = 'Elemento agregado dinámicamente';
-    //   contenedor.appendChild(nuevo);
-    // }, 2000);
+    observer.observe(contenedor, { childList: true, attributes: true, subtree: true });
   </script>
 </body>
 </html>
