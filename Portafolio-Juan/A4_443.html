@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>To-Do List (A4_443)</title>
+  <style>
+    body { font-family: Arial, Helvetica, sans-serif; max-width:800px; margin:24px auto; padding:0 16px; color:#222 }
+    h1 { margin-bottom:8px }
+    .controls { display:flex; gap:8px; margin-bottom:12px }
+    input[type="text"] { flex:1; padding:6px 8px; font-size:14px }
+    button { padding:6px 10px; font-size:14px; cursor:pointer }
+    ul.todolist { list-style:none; padding:0; margin:0 0 12px 0 }
+    ul.todolist li { display:flex; align-items:center; justify-content:space-between; border:1px solid #ccc; padding:8px; margin-bottom:8px; background:#fff }
+    ul.todolist li.completed { background:#e6ffe6; text-decoration:line-through; color:#555 }
+    .left { display:flex; align-items:center; gap:10px; flex:1 }
+    .item-text { flex:1 }
+    .actions { display:flex; gap:8px }
+    .registro { border-top:2px solid #eee; padding-top:12px }
+    .log { background:#fafafa; border:1px solid #ddd; padding:12px; min-height:80px; white-space:pre-line; font-family:monospace }
+    .checkbox { width:20px; height:20px }
+    .btn-del { background:#fff; border:1px solid #d9534f; color:#d9534f; padding:4px 8px }
+    .btn-add { background:#337ab7; color:#fff; border:none }
+  </style>
+</head>
+<body>
+  <h1>To-Do List</h1>
+
+  <div class="controls">
+    <input id="taskInput" type="text" placeholder="Escribe una tarea..." aria-label="Nueva tarea" />
+    <button id="addBtn" class="btn-add">Agregar</button>
+  </div>
+
+  <ul id="todoList" class="todolist" aria-live="polite">
+    <!-- ítems iniciales para reproducir la figura -->
+    <li data-id="1" class="completed">
+      <div class="left">
+        <input class="checkbox" type="checkbox" checked aria-label="marcar tarea" />
+        <span class="item-text">Ir a la facultad</span>
+      </div>
+      <div class="actions">
+        <button class="btn-del" title="Eliminar">✖</button>
+      </div>
+    </li>
+
+    <li data-id="2">
+      <div class="left">
+        <input class="checkbox" type="checkbox" aria-label="marcar tarea" />
+        <span class="item-text">Hacer las compras</span>
+      </div>
+      <div class="actions">
+        <button class="btn-del" title="Eliminar">✖</button>
+      </div>
+    </li>
+  </ul>
+
+  <section class="registro">
+    <h2>Registro de cambios en el DOM:</h2>
+    <div id="log" class="log">Esperando cambios en el DOM...</div>
+  </section>
+
+  <script>
+    // Elementos principales
+    const input = document.getElementById('taskInput');
+    const addBtn = document.getElementById('addBtn');
+    const list = document.getElementById('todoList');
+    const log = document.getElementById('log');
+
+    // Helper: añadir línea al registro
+    function pushLog(line) {
+      const ts = new Date().toLocaleTimeString();
+      log.textContent += '\n' + line;
+      // mantener scroll abajo
+      log.scrollTop = log.scrollHeight;
+      console.log(line);
+    }
+
+    // Crear elemento li para una tarea
+    let idCounter = 3;
+    function createTodoItem(text, completed = false) {
+      const li = document.createElement('li');
+      li.dataset.id = String(idCounter++);
+      if (completed) li.classList.add('completed');
+
+      const left = document.createElement('div'); left.className = 'left';
+      const checkbox = document.createElement('input'); checkbox.type = 'checkbox'; checkbox.className = 'checkbox';
+      if (completed) checkbox.checked = true;
+      const span = document.createElement('span'); span.className = 'item-text'; span.textContent = text;
+      left.appendChild(checkbox); left.appendChild(span);
+
+      const actions = document.createElement('div'); actions.className = 'actions';
+      const del = document.createElement('button'); del.className = 'btn-del'; del.textContent = '✖';
+      actions.appendChild(del);
+
+      li.appendChild(left); li.appendChild(actions);
+
+      // Eventos locales: marcar completado / eliminar
+      checkbox.addEventListener('change', () => {
+        if (checkbox.checked) {
+          li.classList.add('completed');
+          // marcar un atributo para que el observer detecte attribute change
+          li.setAttribute('data-completed', 'true');
+        } else {
+          li.classList.remove('completed');
+          li.removeAttribute('data-completed');
+        }
+      });
+
+      del.addEventListener('click', () => {
+        li.remove();
+      });
+
+      return li;
+    }
+
+    // Agregar tarea desde input
+    function addTaskFromInput() {
+      const value = input.value.trim();
+      if (!value) return;
+      const li = createTodoItem(value, false);
+      list.appendChild(li);
+      input.value = '';
+      input.focus();
+    }
+
+    addBtn.addEventListener('click', addTaskFromInput);
+    input.addEventListener('keydown', e => { if (e.key === 'Enter') addTaskFromInput(); });
+
+    // MutationObserver que registra cambios
+    const observer = new MutationObserver(mutations => {
+      mutations.forEach(m => {
+        const targetTag = m.target && m.target.tagName ? m.target.tagName : 'unknown';
+        if (m.type === 'childList') {
+          // Detectar adiciones y eliminaciones
+          if (m.addedNodes && m.addedNodes.length) {
+            for (const n of m.addedNodes) {
+              if (n.nodeType === Node.ELEMENT_NODE) pushLog(`Cambio: childList (agregado) en ${targetTag} -> ${n.tagName}`);
+            }
+          }
+          if (m.removedNodes && m.removedNodes.length) {
+            for (const n of m.removedNodes) {
+              if (n.nodeType === Node.ELEMENT_NODE) pushLog(`Cambio: childList (eliminado) en ${targetTag} -> ${n.tagName}`);
+            }
+          }
+        } else if (m.type === 'attributes') {
+          pushLog(`Cambio: attributes (${m.attributeName}) en ${targetTag}`);
+        } else {
+          pushLog(`Cambio: ${m.type} en ${targetTag}`);
+        }
+      });
+    });
+
+    // Observamos la lista para childList y atributos en elementos hijos
+    observer.observe(list, { childList: true, attributes: true, subtree: true });
+
+    // Disparos de prueba: simular un agregado dinámico (como en el snippet que te pasaste)
+    setTimeout(() => {
+      const nuevo = document.createElement('p');
+      nuevo.textContent = 'Elemento agregado dinámicamente';
+      // lo añadimos dentro de la sección registro para demostrar childList
+      document.querySelector('.registro').appendChild(nuevo);
+    }, 2000);
+
+    // Pequeña mejora: inicializar atributos en elementos ya presentes para que cambien sean detectables
+    Array.from(list.children).forEach(li => {
+      if (li.classList.contains('completed')) li.setAttribute('data-completed', 'true');
+    });
+  </script>
+</body>
+</html>
