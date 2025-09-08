@@ -2,32 +2,36 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Práctica a4_4</title>
-    <link rel="stylesheet" href="/css/estilo-A4.css">
+    <meta charset="UTF-8" />
+    <title>Práctica A4_4</title>
+    <link rel="stylesheet" href="css/estilo-A4.css" />
 </head>
 <body>
-    <h1>Resultados del Script</h1>
-    
+    <h1>Buscar el número más repetido</h1>
+
     <div id="resultados">
-        <h2>1. Buscar numeros repetidos:</h2>
-        <p>Array original: [1,1,2,3,3,4,4,4,5,5,6]</p>
-        <p>Solucion: <span id="cubos"></span></p>
-        <p>Solucion2: <span id="cubos2"></span></p>
+        <p>Array original: <code>[1,1,2,3,3,4,4,4,5,5,6]</code></p>
+        <p>Más repetido: <strong id="respuesta"></strong></p>
     </div>
 
     <script>
-        // Ejercicio
-        let numeros = [1,1,2,3,3,4,4,4,5,5,6]
-        let unicos = [... new Set(numeros)];
-        document.getElementById("cubos").textContent = unicos.join(", ");
-        let conteo = numeros.reduce((map,p)=> {
-            map[p]= (map[p] | | 0)+1;
-            return map;
-        },{}));
-        
-        // Mostrar el resultado en el HTML
-        document.getElementById("cubos2").textContent = conteo.join(", ");
+        // Array de prueba
+        const numeros = [1,1,2,3,3,4,4,4,5,5,6];
+
+        // Conteo de frecuencias
+        const frecuencias = numeros.reduce((acc, n) => {
+            acc[n] = (acc[n] || 0) + 1;
+            return acc;
+        }, {});
+
+        // Encontrar el número con mayor frecuencia
+        let masRepetido = null;
+        let max = -Infinity;
+        for (const [valor, veces] of Object.entries(frecuencias)) {
+            if (veces > max) { max = veces; masRepetido = Number(valor); }
+        }
+
+        document.getElementById('respuesta').textContent = `${masRepetido} (${max} veces)`;
     </script>
 </body>
 </html>
