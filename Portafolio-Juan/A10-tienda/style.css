@@ -1,0 +1,6 @@
+body{font-family:Arial, sans-serif; margin:20px}
+.grid{display:flex; gap:24px; align-items:flex-start}
+.card{border:1px solid #ccc; padding:14px; width:160px; border-radius:4px}
+.card h3{margin:0 0 8px}
+.carrito-mini{position:relative; float:right; background:#f3f3f3; padding:8px 12px; border-radius:4px; margin-bottom:12px}
+button{cursor:pointer}

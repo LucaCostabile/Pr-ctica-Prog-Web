@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Cadena de Servlets</title>
+  <style>body{font-family:Arial,Helvetica,sans-serif;margin:2rem}label{display:block;margin:.5rem 0}</style>
+  <script>
+    function enviar(e){
+      const form=document.getElementById('frm');
+      form.action='paso1';
+      form.method='post';
+      form.submit();
+      e.preventDefault();
+    }
+  </script>
+  </head>
+<body>
+  <h2>Registro de Usuario (Paso 1 → Paso 2 → Paso 3)</h2>
+  <form id="frm" onsubmit="enviar(event)">
+    <label>Nombre <input type="text" name="nombre" required></label>
+    <label>Email <input type="email" name="email" required></label>
+    <label>Edad <input type="number" name="edad" min="0" step="1" required></label>
+    <button type="submit">Enviar</button>
+  </form>
+  <p>Flujo: index.html → POST /paso1 → (forward) /paso2 → (insert BD y forward) /paso3</p>
+</body>
+</html>
