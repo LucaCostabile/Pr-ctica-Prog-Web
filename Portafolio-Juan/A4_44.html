@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Aplana y ordena matriz 3D</title>
+</head>
+<body>
+	<h1>Aplanar y ordenar una matriz tridimensional</h1>
+	<script>
+		const matrizTridimensional = [
+			[
+				[9, 3, 12],
+				[7, 1]
+			],
+			[
+				[5, 10],
+				[2, 8, 6]
+			]
+		];
+
+		const arregloPlano = matrizTridimensional.flat(2);
+		const arregloOrdenado = [...arregloPlano].sort((a, b) => a - b);
+
+		document.write(`<p>Matriz original: ${JSON.stringify(matrizTridimensional)}</p>`);
+		document.write(`<p>Arreglo plano: ${JSON.stringify(arregloPlano)}</p>`);
+		document.write(`<p>Arreglo ordenado: ${JSON.stringify(arregloOrdenado)}</p>`);
+	</script>
+</body>
+</html>
