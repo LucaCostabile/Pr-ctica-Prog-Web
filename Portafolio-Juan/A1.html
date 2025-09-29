@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Mi Sitio Web</title>
+	<style>
+		:root {
+			color-scheme: light;
+		}
+
+		body {
+			margin: 0;
+			font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+			background-color: #fdfdfd;
+			color: #222;
+		}
+
+		.layout {
+			max-width: 980px;
+			margin: 0 auto;
+			padding: 16px;
+		}
+
+		header,
+		nav,
+		main,
+		aside,
+		footer {
+			background-color: #fff;
+			border: 1px solid #ccc;
+			margin-bottom: 18px;
+			padding: 16px 20px;
+		}
+
+		header {
+			text-align: left;
+		}
+
+		header h1 {
+			margin: 0 0 8px;
+			font-size: 2.2rem;
+		}
+
+		header p {
+			margin: 0;
+			font-size: 1rem;
+		}
+
+		nav ul {
+			list-style: disc;
+			padding-left: 20px;
+			margin: 0;
+		}
+
+		nav a {
+			color: #0a58ca;
+			text-decoration: none;
+		}
+
+		nav a:hover,
+		nav a:focus {
+			text-decoration: underline;
+		}
+
+		main {
+			padding-bottom: 24px;
+		}
+
+		section h2,
+		aside h2 {
+			margin-top: 0;
+			font-size: 1.2rem;
+		}
+
+		article {
+			border: 1px solid #ccc;
+			background-color: #fafafa;
+			padding: 14px 18px;
+			margin-bottom: 16px;
+		}
+
+		article:last-of-type {
+			margin-bottom: 0;
+		}
+
+		article h3 {
+			margin: 0 0 6px;
+			font-size: 1.05rem;
+		}
+
+		article p,
+		aside p,
+		footer p {
+			margin: 0;
+			font-size: 0.95rem;
+			line-height: 1.5;
+		}
+
+		footer {
+			text-align: left;
+			font-size: 0.85rem;
+			color: #555;
+		}
+	</style>
+</head>
+<body>
+	<div class="layout">
+		<header>
+			<h1>Mi Sitio Web (colocar esto en un header)</h1>
+			<p>Bienvenido a mi página de ejemplo</p>
+		</header>
+
+		<nav>
+			<ul>
+				<li><a href="#inicio">Inicio</a></li>
+				<li><a href="#acerca">Acerca</a></li>
+				<li><a href="#contacto">Contacto</a></li>
+			</ul>
+		</nav>
+
+		<main>
+			<section aria-labelledby="sec-principal">
+				<h2 id="sec-principal">Sección principal (usar la etiqueta section)</h2>
+
+				<article id="inicio" aria-labelledby="art-1">
+					<h3 id="art-1">Artículo 1</h3>
+					<p>Este es el contenido del primer artículo (usar la etiqueta article).</p>
+				</article>
+
+				<article aria-labelledby="art-2">
+					<h3 id="art-2">Artículo 2</h3>
+					<p>Este es el contenido del segundo artículo.</p>
+				</article>
+			</section>
+		</main>
+
+		<aside aria-labelledby="info-adicional">
+			<h2 id="info-adicional">Información adicional</h2>
+			<p>Noticias, enlaces, publicidad o cualquier contenido secundario.</p>
+		</aside>
+
+		<footer>
+			<p>© 2025 Julio Monetti. Todos los derechos reservados.</p>
+		</footer>
+	</div>
+</body>
+</html>
