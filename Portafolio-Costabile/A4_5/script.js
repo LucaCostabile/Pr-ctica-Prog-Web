@@ -23,7 +23,7 @@ class RNA {
 }
 
 class Vehiculo {
-  // datos privados: marca, modelo, anio, ruedas, titulo, motor, velocidad
+  
   #marca; #modelo; #anio; #ruedas; #titulo; #motor; #velocidad;
   constructor(marca, modelo, anio, ruedas = [], titulo = null, motor = null) {
     this.#marca = marca;
@@ -31,10 +31,10 @@ class Vehiculo {
     this.#anio = anio;
     this.#ruedas = ruedas || [];
     this.#titulo = titulo || new Titulo();
-    this.#motor = motor || null; // composición con Motor
+    this.#motor = motor || null; 
     this.#velocidad = 0;
   }
-  // getters / setters mínimos para acceder a datos privados
+  
   getMarca() { return this.#marca; }
   getModelo() { return this.#modelo; }
   getAnio() { return this.#anio; }
@@ -66,7 +66,7 @@ class Camion extends Vehiculo {
     const r = ruedas || Array.from({ length: 6 }, () => new Rueda(marca, '0 km'));
     super(marca, modelo, anio, r, titulo, motor);
     this.capacidadCarga = Number(capacidadCarga) || 0;
-    this.tipoEntidad = tipoEntidad; // puede ser instancia de Remolque o Frigorifico
+    this.tipoEntidad = tipoEntidad; 
     this.cargaActual = 0;
   }
   cargar(kg) {
@@ -121,14 +121,14 @@ function actualizarSelects() {
     if (!sel) return;
     sel.innerHTML = '<option value="">-- seleccionar motor --</option>' + motores.map((m, i) => `<option value="${i}">${m.info()}</option>`).join('');
   });
-  // actualizar selects de títulos si existen en el DOM
+  
   const tituloSelects = [$('auto-titulo'), $('camion-titulo')];
   tituloSelects.forEach(sel => {
     if (!sel) return;
     sel.innerHTML = '<option value="">-- seleccionar título --</option>' + titulos.map((t, i) => `<option value="${i}">${t.info()}</option>`).join('');
   });
 
-  // actualizar selects/plantillas de rueda
+  
   const ruedaSelects = [$('auto-rueda'), $('camion-rueda')];
   ruedaSelects.forEach(sel => {
     if (!sel) return;
@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderList('motores-list', motores, (m,i) => `${i}: ${m.info()}`);
   });
 
-  // crear plantilla de rueda
+  
   const crearRuedaBtn = $('crear-rueda');
   if (crearRuedaBtn) {
     crearRuedaBtn.addEventListener('click', () => {
@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // crear título
+  
   const crearTituloBtn = $('crear-titulo');
   if (crearTituloBtn) {
     crearTituloBtn.addEventListener('click', () => {
@@ -184,7 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const ruedas = (ruedaIdx !== '' && ruedasTemplates[Number(ruedaIdx)]) ? Array.from({ length: 4 }, () => ruedasTemplates[Number(ruedaIdx)]) : null;
   const titulo = (tituloIdx !== '' && titulos[Number(tituloIdx)]) ? titulos[Number(tituloIdx)] : null;
     const a = new Auto($('auto-marca').value, $('auto-modelo').value, $('auto-anio').value, motor, $('auto-puertas').value);
-  // si hay ruedas o título seleccionados, asignarlos mediante setters
+  
   if (ruedas) a.setRuedas(ruedas);
   if (titulo) a.setTitulo(titulo);
   if (motor) a.setMotor(motor);
@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const tituloIdx = $('camion-titulo') ? $('camion-titulo').value : '';
     const ruedas = (ruedaIdx !== '' && ruedasTemplates[Number(ruedaIdx)]) ? Array.from({ length: 6 }, () => ruedasTemplates[Number(ruedaIdx)]) : null;
     const titulo = (tituloIdx !== '' && titulos[Number(tituloIdx)]) ? titulos[Number(tituloIdx)] : null;
-    // crear instancia de tipoEntidad según selección
+    
     let tipoEntidad = null;
     if (tipoSel === 'remolque') tipoEntidad = new Remolque();
     if (tipoSel === 'frigorifico') tipoEntidad = new Frigorifico();
